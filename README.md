@@ -21,10 +21,10 @@ until then, we have to use workarounds.
 # workarounds
 
 - multiprocessing
-     - running multiple python processes/interpreters each with its own GIL and memory space
+     - running multiple python processes/interpreters each with their own GIL and memory space.
      - pros:
           - simple to implement
-          - high cpu priority (the os prioritizes processes over threads)
+          - high cpu priority (the os usually prioritizes processes over threads)
           - high memory isolation and safety
      - cons:
           - no shared memory, so data has to be serialized and deserialized
