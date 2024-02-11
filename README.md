@@ -4,7 +4,7 @@
 
 ---
 
-python's cpython implementation is already pretty good at io-bound tasks through async/await. but the GIL (global interpreter lock) makes hinders parallelism for cpu-bound tasks.
+python's cpython implementation is already pretty good at io-bound tasks through async/await. but the GIL (global interpreter lock) hinders parallelism for cpu-bound tasks.
 
 the community is actively working on this:
 
