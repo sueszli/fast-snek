@@ -9,7 +9,7 @@ until then, we have to use workarounds.
 - multiprocessing
 
      - https://docs.python.org/3/library/multiprocessing.html
-     - https://docs.python.org/3/library/concurrent.futures.html (same functionality but inspired by java, more high level)
+     - https://docs.python.org/3/library/concurrent.futures.html (same functionality but inspired by java)
 
      - this is the intended way: by running multiple system processes, each with its python interpreter that has its own GIL and memory space.
 
