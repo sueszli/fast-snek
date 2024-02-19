@@ -2,19 +2,9 @@ python (the cpython implementation) is already pretty good at io-bound tasks thr
 
 but the GIL (global interpreter lock) hinders parallelism for cpu-bound tasks.
 
-the community is actively working on this:
-
-- using multiple sub-interpreters
-     - https://peps.python.org/pep-0554/
-     - https://peps.python.org/pep-0683/
-- making the gil optional
-     - https://peps.python.org/pep-0703/
-     - https://discuss.python.org/t/a-steering-council-notice-about-pep-703-making-the-global-interpreter-lock-optional-in-cpython/30474
-     - https://engineering.fb.com/2023/10/05/developer-tools/python-312-meta-new-features/
+the community is actively working on this by either introducing multiple sub-interpreters [^1] [^2] or making the GIL optional [^3] [^4] [^5].
 
 until then, we have to use workarounds.
-
-# options
 
 - multiprocessing
 
@@ -33,7 +23,15 @@ until then, we have to use workarounds.
           - creation overhead: slow creation, destruction and management, because we are context-switching to the os to manage system processes.
           - not portable: processes are managed differently in each operating system.
 
-# sources
+<br><br>
+
+## references
 
 - https://realpython.com/python-parallel-processing/#make-python-threads-run-in-parallel
 - https://github.com/realpython/materials/tree/master/python-parallel-processing/
+
+[^1]: https://peps.python.org/pep-0554/
+[^2]: https://peps.python.org/pep-0683/
+[^3]: https://peps.python.org/pep-0703/
+[^4]: https://discuss.python.org/t/a-steering-council-notice-about-pep-703-making-the-global-interpreter-lock-optional-in-cpython/30474
+[^5]: https://engineering.fb.com/2023/10/05/developer-tools/python-312-meta-new-features/
