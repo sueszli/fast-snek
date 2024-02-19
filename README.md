@@ -14,15 +14,14 @@ the community is actively working on this:
 
 until then, we have to use workarounds.
 
-## workarounds
+# options
 
 - multiprocessing
 
      - https://docs.python.org/3/library/multiprocessing.html
      - https://docs.python.org/3/library/concurrent.futures.html (same functionality but inspired by java, more high level)
 
-     - running multiple system processes, each with its python interpreter that has its own GIL and memory space.
-     -
+     - this is the intended way: by running multiple system processes, each with its python interpreter that has its own GIL and memory space.
 
      - pros:
           - simple to implement and understand, drop-in replacement for threading.
@@ -34,7 +33,7 @@ until then, we have to use workarounds.
           - creation overhead: slow creation, destruction and management, because we are context-switching to the os to manage system processes.
           - not portable: processes are managed differently in each operating system.
 
-## sources
+# sources
 
 - https://realpython.com/python-parallel-processing/#make-python-threads-run-in-parallel
 - https://github.com/realpython/materials/tree/master/python-parallel-processing/
