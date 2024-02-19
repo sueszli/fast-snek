@@ -1,10 +1,6 @@
-- https://realpython.com/python-parallel-processing/#make-python-threads-run-in-parallel
+python (the cpython implementation) is already pretty good at io-bound tasks through async/await.
 
-- https://github.com/realpython/materials/tree/master/python-parallel-processing/
-
----
-
-python (cpython implementation) is already pretty good at io-bound tasks through async/await. but the GIL (global interpreter lock) hinders parallelism for cpu-bound tasks.
+but the GIL (global interpreter lock) hinders parallelism for cpu-bound tasks.
 
 the community is actively working on this:
 
@@ -23,16 +19,22 @@ until then, we have to use workarounds.
 - multiprocessing
 
      - https://docs.python.org/3/library/multiprocessing.html
-     - https://docs.python.org/3/library/concurrent.futures.html (same functionality but inspired by java)
+     - https://docs.python.org/3/library/concurrent.futures.html (same functionality but inspired by java, more high level)
 
-     - running multiple python processes/interpreters each with their own GIL and memory space.
+     - running multiple system processes, each with its python interpreter that has its own GIL and memory space.
+     -
 
      - pros:
-          - simple to implement and understand, drop-in replacement for threading
-          - high cpu priority (the os usually prioritizes processes over threads)
-          - high memory isolation and safety
+          - simple to implement and understand, drop-in replacement for threading.
+          - high cpu priority (the os usually prioritizes processes over threads).
+          - high memory isolation and safety.
      - cons:
-          - data serialization overhead: slow inter-process communication because there is no shared memory, so data has to be serialized and deserialized
-          - some objects are unserializeable (i.e. lambdas, file handles, etc.)
-          - creation overhead: slow creation, destruction and management, because we are context switching to the os to manage system processes
-          - not portable: some os's have different process management
+          - data serialization overhead: there is no shared memory, so data has to be serialized and deserialized for inter-process communication.
+          - some objects are unserializeable: the `pickle` module is used to serialize objects, and some objects are not pickleable (i.e. lambdas, file handles, etc.).
+          - creation overhead: slow creation, destruction and management, because we are context-switching to the os to manage system processes.
+          - not portable: processes are managed differently in each operating system.
+
+## sources
+
+- https://realpython.com/python-parallel-processing/#make-python-threads-run-in-parallel
+- https://github.com/realpython/materials/tree/master/python-parallel-processing/
