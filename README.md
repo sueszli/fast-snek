@@ -1,8 +1,8 @@
-python (the cpython implementation) is already pretty good at io-bound tasks through async/await.
+the cpython interpreter is already pretty good at io-bound tasks through async/await.
 
 but the GIL (global interpreter lock) hinders parallelism for cpu-bound tasks.
 
-the community is actively working on this by either introducing multiple sub-interpreters [^1] [^2] or making the GIL optional [^3] [^4] [^5].
+the community is actively working on this by either introducing multiple sub-interpreters [^subint1] [^subint2] or making the GIL optional [^nogil1] [^nogil2] [^nogil3].
 
 until then, we have to use workarounds.
 
@@ -30,8 +30,8 @@ until then, we have to use workarounds.
 - https://realpython.com/python-parallel-processing/#make-python-threads-run-in-parallel
 - https://github.com/realpython/materials/tree/master/python-parallel-processing/
 
-[^1]: https://peps.python.org/pep-0554/
-[^2]: https://peps.python.org/pep-0683/
-[^3]: https://peps.python.org/pep-0703/
-[^4]: https://discuss.python.org/t/a-steering-council-notice-about-pep-703-making-the-global-interpreter-lock-optional-in-cpython/30474
-[^5]: https://engineering.fb.com/2023/10/05/developer-tools/python-312-meta-new-features/
+[^subint1]: https://peps.python.org/pep-0554/
+[^subint2]: https://peps.python.org/pep-0683/
+[^nogil1]: https://peps.python.org/pep-0703/
+[^nogil2]: https://discuss.python.org/t/a-steering-council-notice-about-pep-703-making-the-global-interpreter-lock-optional-in-cpython/30474
+[^nogil3]: https://engineering.fb.com/2023/10/05/developer-tools/python-312-meta-new-features/
