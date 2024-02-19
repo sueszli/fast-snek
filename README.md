@@ -30,11 +30,6 @@ until then, we have to use workarounds:
 
      - we can write extension modules where the GIL is released and call them from python.
 
-     - pros:
-          - maximum performance: we can reach bare-metal level performance.
-     - cons:
-          - unsafe: we have to manage memory manually, which is error-prone.
-
 - mojo lang
 
      - https://docs.modular.com/mojo/stdlib/python/python.html
