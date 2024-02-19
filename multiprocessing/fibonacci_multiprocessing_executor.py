@@ -7,6 +7,7 @@ def fib(n):
 
 
 if __name__ == "__main__":
+    arg = 35
     cores = os.cpu_count()
     with ProcessPoolExecutor(max_workers=cores) as executor:
-        results = executor.map(fib, range(35))
+        results = executor.map(fib, range(arg))

@@ -6,5 +6,6 @@ def fib(n):
 
 
 if __name__ == "__main__":
+    arg = 35
     for _ in range(multiprocessing.cpu_count()):
         multiprocessing.Process(target=fib, args=(35,)).start()

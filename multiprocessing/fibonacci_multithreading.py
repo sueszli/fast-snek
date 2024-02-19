@@ -7,4 +7,5 @@ def fib(n):
 
 
 for _ in range(os.cpu_count()):
-    threading.Thread(target=fib, args=(35,)).start()
+    arg = 35
+    threading.Thread(target=fib, args=(arg,)).start()

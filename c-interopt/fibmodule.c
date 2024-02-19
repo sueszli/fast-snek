@@ -1,6 +1,7 @@
 #include <Python.h>
 
-// implementation
+// dependency: https://github.com/python/cpython/blob/main/Include/Python.h
+
 int fib(int n) {
     return n < 2 ? n : fib(n - 2) + fib(n - 1);
 }
@@ -25,21 +26,19 @@ static PyObject* fibmodule_fib(PyObject* self, PyObject* args) {
     return Py_BuildValue("i", result);
 }
 
-// module definition:
-// - PyMethodDef: list of methods
-// - PyModuleDef: module definition
-// - PyMODINIT_FUNC: module initialization function
-static PyMethodDef fib_methods[] = {
-    {"fib", fibmodule_fib, METH_VARARGS, "Calculate the nth Fibonacci"},
-    {NULL, NULL, 0, NULL}
+static PyMethodDef fib_methods[] = { // list of methods
+    {"fib", fibmodule_fib, METH_VARARGS, "Calculate the nth Fibonacci"}, // function definition: name, function, flags, docstring
+    {NULL, NULL, 0, NULL} // sentinel (end of list)
 };
-static struct PyModuleDef fibmodule = {
+
+static struct PyModuleDef fibmodule = { // module definition : name, docstring, flag, methods
     PyModuleDef_HEAD_INIT,
-    "fibmodule",
+    "fibmodule", 
     "Efficient Fibonacci number calculator",
-    -1,
+    -1, 
     fib_methods
 };
-PyMODINIT_FUNC PyInit_fibmodule(void) {
+
+PyMODINIT_FUNC PyInit_fibmodule(void) { // module initialization
     return PyModule_Create(&fibmodule);
 }

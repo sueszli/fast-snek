@@ -6,5 +6,6 @@ def fib(n):
 
 
 if __name__ == "__main__":
+    arg = 35
     with multiprocessing.Pool(processes=multiprocessing.cpu_count()) as pool:
-        results = pool.map(fib, range(35))
+        results = pool.map(fib, range(arg))
