@@ -4,7 +4,7 @@ but the GIL (global interpreter lock) hinders parallelism for cpu-bound tasks.
 
 the community is actively working on this by either introducing multiple sub-interpreters [^subint1] [^subint2] or making the GIL optional [^nogil1] [^nogil2] [^nogil3].
 
-until then, we have to use workarounds.
+until then, we have to use workarounds:
 
 - multiprocessing
 
@@ -22,6 +22,14 @@ until then, we have to use workarounds.
           - some objects are unserializeable: the `pickle` module is used to serialize objects, and some objects are not pickleable (i.e. lambdas, file handles, etc.).
           - creation overhead: slow creation, destruction and management, because we are context-switching to the os to manage system processes.
           - not portable: processes are managed differently in each operating system.
+
+- c interopt
+
+     - we can write c extension modules where the GIL is released, and we can manage memory ourselves.
+
+     - pros:
+          - portable: c-extensions are managed by the python interpreter, so they are portable.
+          - maximum performance: we're at bare-metal.
 
 <br><br>
 
