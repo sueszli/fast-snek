@@ -23,13 +23,23 @@ until then, we have to use workarounds:
           - creation overhead: slow creation, destruction and management, because we are context-switching to the os to manage system processes.
           - not portable: processes are managed differently in each operating system.
 
-- c interopt
+- interop
 
-     - we can write c extension modules where the GIL is released, and we can manage memory ourselves.
+     - c/c++: https://docs.python.org/3/extending/extending.html
+     - rust: https://github.com/PyO3/pyo3/blob/main/guide/src/parallelism.md#parallelism → relatively new but promising. used in the [polars](https://github.com/pola-rs/polars) project. but contains some [unsafe code](https://users.rust-lang.org/t/python-rust-interop/30243/12) that might be a security risk.
+
+     - we can write extension modules where the GIL is released and call them from python.
 
      - pros:
-          - portable: c-extensions are managed by the python interpreter, so they are portable.
-          - maximum performance: we're at bare-metal.
+          - maximum performance: we can reach bare-metal level performance.
+     - cons:
+          - unsafe: we have to manage memory manually, which is error-prone.
+
+- mojo lang
+
+     - https://docs.modular.com/mojo/stdlib/python/python.html
+
+     - new language that is designed to be a drop-in replacement for python. still in its infancy, but it has a lot of potential.
 
 <br><br>
 
