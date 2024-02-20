@@ -2,39 +2,44 @@ the cpython interpreter is already pretty good at io-bound tasks through async/a
 
 but the GIL (global interpreter lock) hinders parallelism for cpu-bound tasks.
 
-the community is actively working on this by either introducing multiple sub-interpreters [^subint1] [^subint2] or making the GIL optional [^nogil1] [^nogil2] [^nogil3].
+the community is actively working on this by either trying to introduce multiple sub-interpreters [^subint1] [^subint2] or making the GIL optional [^nogil1] [^nogil2] [^nogil3].
 
-until then, we have to use workarounds:
+until then, we have to use workarounds.
 
-- _multiprocessing_
+<br><br>
 
-     - https://docs.python.org/3/library/multiprocessing.html
-     - https://docs.python.org/3/library/concurrent.futures.html (same functionality but inspired by java)
+## parallelism in python
 
-     - this is the intended way: by running multiple system processes, each with its python interpreter that has its own GIL and memory space.
+_multiprocessing_
 
-     - pros:
-          - simple to implement and understand, drop-in replacement for threading.
-          - high cpu priority (the os usually prioritizes processes over threads).
-          - high memory isolation and safety.
-     - cons:
-          - data serialization overhead: there is no shared memory, so data has to be serialized and deserialized for inter-process communication.
-          - some objects are unserializeable: the `pickle` module is used to serialize objects, and some objects are not pickleable (i.e. lambdas, file handles, etc.).
-          - creation overhead: slow creation, destruction and management, because we are context-switching to the os to manage system processes.
-          - not portable: processes are managed differently in each operating system.
+- this is the intended way: by running multiple system processes, each with its python interpreter that has its own GIL and memory space.
 
-- _interop_
+- https://docs.python.org/3/library/multiprocessing.html
+- https://docs.python.org/3/library/concurrent.futures.html (same functionality but inspired by java)
 
-     - c/c++: https://docs.python.org/3/extending/extending.html
-     - rust: https://github.com/PyO3/pyo3/blob/main/guide/src/parallelism.md#parallelism → relatively new but promising. used in the [polars](https://github.com/pola-rs/polars) project. but contains some [unsafe code](https://users.rust-lang.org/t/python-rust-interop/30243/12) that might be a security risk.
+- pros:
+     - simple to implement and understand, drop-in replacement for threading.
+     - high cpu priority (the os usually prioritizes processes over threads).
+     - high memory isolation and safety.
+- cons:
 
-     - we can write extension modules where the GIL is released and call them from python.
+     - data serialization overhead: there is no shared memory, so data has to be serialized and deserialized for inter-process communication.
+     - some objects are unserializeable: the `pickle` module is used to serialize objects, and some objects are not pickleable (i.e. lambdas, file handles, etc.).
+     - creation overhead: slow creation, destruction and management, because we are context-switching to the os to manage system processes.
+     - not portable: processes are managed differently in each operating system.
 
-- _mojo lang_
+_extensions_
 
-     - https://docs.modular.com/mojo/stdlib/python/python.html
+- we can write extension modules where the GIL is released and call them from python.
 
-     - new language that is designed to be a drop-in replacement for python. still in its infancy, but it has a lot of potential.
+- c/c++: https://docs.python.org/3/extending/extending.html
+- rust: https://github.com/PyO3/pyo3/blob/main/guide/src/parallelism.md#parallelism → relatively new but promising. used in the [polars](https://github.com/pola-rs/polars) project. but contains some [unsafe code](https://users.rust-lang.org/t/python-rust-interop/30243/12) that might be a security risk.
+
+_mojo lang_
+
+- new language that is designed to be a drop-in replacement for python. still in its infancy, but it has a lot of potential.
+
+- https://docs.modular.com/mojo/stdlib/python/python.html
 
 <br><br>
 
