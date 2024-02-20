@@ -13,7 +13,7 @@ until then, we can:
 - use the `multiprocessing` standard library
 - use c-python interop
 
-<br>
+<br><br>
 
 ## multiprocessing
 
@@ -32,7 +32,7 @@ links:
 - https://docs.python.org/3/library/multiprocessing.html (same api as `threading`, so they're interchangable)
 - https://docs.python.org/3/library/concurrent.futures.html (same functionality but more java-like)
 
-<br>
+<br><br>
 
 ## c extension modules
 
@@ -50,7 +50,7 @@ links:
 
 - https://docs.python.org/3/extending/extending.html
 
-<br>
+<br><br>
 
 ## ctypes (foreign function interface)
 
@@ -65,7 +65,7 @@ links:
 - https://docs.python.org/3/library/ctypes.html
 - https://cffi.readthedocs.io/en/stable/overview.html#main-mode-of-usage
 
-<br>
+<br><br>
 
 ## references
 
