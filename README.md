@@ -70,7 +70,7 @@ to make our compute-bound python code faster, we can use:
 - superset programming languages [^superset1] [^superset2]
 	- still in their infancy.
 - different python implementations, like jit interpreters
-	- ~4x faster when singlet-threaded [^PyPy] but parallelism often not possible.
+	- ~4x faster when single-threaded [^PyPy] but no parallelism.
 - the `multiprocessing` standard library
 	- high call overhead, (de)serialization overhead, resource overhead
 - multithreaded c/c++ code 🔥
