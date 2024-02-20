@@ -51,11 +51,10 @@ links:
 
 writing a shared library in c (or any other language providing a c interface [^nogolang]) and then calling it from multithreaded python code.
 
-cffi, although not part of the standard library, is just as ergonomic and significantly faster [^edge].
-
 - ✓ very simple: no knowledge of extension api necessary. gil is released automatically on each foreign function call [^release].
 - ✓ portable: also works with other python interpreters.
-- 𝙓 significantly higher python prep overhead: serialization costs and function call overhead. automatic type conversions done by the ffi-library are very expensive [^ctypebad]. → this can be partially circumvented by passing pointers.
+- 𝙓 significantly higher python prep overhead: serialization costs and function call overhead. automatic type conversions done by the ffi-library are very expensive [^ctypebad]. → this can be partially circumvented by passing pointers or using cffi [^edge].
+
 
 links:
 
