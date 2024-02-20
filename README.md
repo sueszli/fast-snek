@@ -13,6 +13,8 @@ until then, we can:
 - use the `multiprocessing` standard library
 - use c-python interop
 
+<br>
+
 ## multiprocessing
 
 - https://docs.python.org/3/library/multiprocessing.html (same api as `threading`, so they're interchangable)
@@ -20,17 +22,15 @@ until then, we can:
 
 when using the `multiprocessing` library in python, we are calling multiple system processes that each come with their own seperate python interpreter, GIL and memeory space.
 
-this is very simple and straightforward, and the way the developers 
+this is very simple and straightforward, and the intended way to write parallel code in the latest python version. but it comes with all the pros and cons of using a processes for parallel programming:
 
-- pros:
-     - very simple.
-     - processes over thread:
-          - high cpu priority. the os always prioritizes processes over threads which can make a difference for specific types of parallelization.
-          - high memory isolation and safety.
-- cons:
-     - serialization overhead: there is no shared memory, so data has to be serialized and deserialized for inter-process communication.
-     - some objects are unserializeable: the `pickle` module is used to serialize objects. but some objects are not pickleable (i.e. lambdas, file handles, etc.).
-     - creation overhead: slow creation, destruction and management, because we are context-switching to the os to manage system processes.
+- ✓ simple.
+- ✓ higher isolation, security, robustness.
+- ✓ context switching: actually doesn't matter, since the `threading` library uses kernel-level threads.
+- 𝙭 resource overhead: memory allocation, creation and management.
+- 𝙭 serialization overhead: there is no shared memory, so data has to be serialized and deserialized for inter-process communication. also some objects are unserializeable: the `pickle` module is used to serialize objects. but some objects are not pickleable (i.e. lambdas, file handles, etc.).
+
+<br>
 
 ## c from python: c extension modules
 
@@ -45,6 +45,8 @@ this is very simple and straightforward, and the way the developers
 - cons:
      - very complex api. data isn't marshalled automatically.
      - not portable. we must link cpython during the build step to extend it. but fortunately there are nice build tools to simplify this [^setuptools].
+
+<br>
 
 ## c from python: ctypes (foreign function interface)
 
@@ -63,6 +65,8 @@ this is very simple and straightforward, and the way the developers
 
 1. try to move as much of the computation as possible into the extension, to reduce python prep overhead, serialization costs, and function call overhead.
 2. if you’re dealing with large numbers of objects, reduce serialization overhead by having a custom extension type that can store the data with minimal conversions to/from Python, the way NumPy does with its array objects.
+
+<br>
 
 ## references
 
