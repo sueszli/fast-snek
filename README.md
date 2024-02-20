@@ -17,9 +17,6 @@ until then, we can:
 
 ## multiprocessing
 
-- https://docs.python.org/3/library/multiprocessing.html (same api as `threading`, so they're interchangable)
-- https://docs.python.org/3/library/concurrent.futures.html (same functionality but more java-like)
-
 when using the `multiprocessing` library in python, we are calling multiple system processes that each come with their own seperate python interpreter, GIL and memeory space.
 
 this is very simple and straightforward, and the intended way to write parallel code in the latest python version. but it comes with all the pros and cons of using a processes for parallel programming:
@@ -30,11 +27,14 @@ this is very simple and straightforward, and the intended way to write parallel 
 - 𝙓 resource overhead: memory allocation, creation and management.
 - 𝙓 serialization overhead: there is no shared memory, so data has to be serialized and deserialized for inter-process communication. also some objects are unserializeable: the `pickle` module is used to serialize objects. but some objects are not pickleable (i.e. lambdas, file handles, etc.).
 
+links:
+
+- https://docs.python.org/3/library/multiprocessing.html (same api as `threading`, so they're interchangable)
+- https://docs.python.org/3/library/concurrent.futures.html (same functionality but more java-like)
+
 <br>
 
 ## c extension modules
-
-- https://docs.python.org/3/extending/extending.html
 
 works by extending cpython with modules in which the gil is manually released. we can then call those modules in multithreaded python code.
 
@@ -46,18 +46,24 @@ alternatively you can also use cython (not to be confused with cpython) for code
 - 𝙓 very complex api. data isn't marshalled automatically, gil isn't freed automatically.
 - 𝙓 not portable. constrained to c. we must link cpython during the build step to extend it. but fortunately there are nice build tools to simplify this [^setuptools].
 
+links:
+
+- https://docs.python.org/3/extending/extending.html
+
 <br>
 
 ## ctypes (foreign function interface)
-
-- https://docs.python.org/3/library/ctypes.html
-- https://cffi.readthedocs.io/en/stable/overview.html#main-mode-of-usage
 
 writing a shared library in c (or any other language providing a c interface [^nogolang]) and then calling it from multithreaded python code.
 
 - ✓ very simple. no knowledge of extension api necessary. gil is released automatically on each foreign function call [^release].
 - ✓ portable. also works with other python interpreters.
 - 𝙓 significantly higher python prep overhead, serialization costs and function call overhead. automatic type conversions done by the ffi-library are very expensive [^ctypebad]. → this can be partially circumvented by passing pointers.
+
+links:
+
+- https://docs.python.org/3/library/ctypes.html
+- https://cffi.readthedocs.io/en/stable/overview.html#main-mode-of-usage
 
 <br>
 
