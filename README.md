@@ -10,7 +10,7 @@ until then, we have to use workarounds in python or superset programming languag
 
 <br><br>
 
-# parallel programming in cpython
+# parallel programming in python
 
 **_1) multiprocessing_**
 
