@@ -19,7 +19,7 @@ until then, we can:
 
 when using the `multiprocessing` library in python, we can call multiple system processes that each come with their own seperate python interpreter, GIL and memeory space.
 
-this is very simple and straightforward, and the intended way to write parallel code in the latest python version. but it comes with all the pros and cons of using a processes for parallel programming:
+this is very simple, straightforward and the intended way to write parallel code in the latest python version. but it comes with all the pros and cons of using a processes for parallel programming:
 
 - ✓ simple.
 - ✓ higher isolation, security, robustness.
