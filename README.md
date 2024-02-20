@@ -14,8 +14,8 @@ until then, we can use some workarounds:
 	- usually ~4x faster when single-threaded [^PyPy] but not parallel and very constrained.
 - the `multiprocessing` standard library
 	- high call overhead, (de)serialization overhead, resource overhead.
-- mixing c/c++ code with python 🔥
-	- a) extending cpython: fastest, but hard to implement.
+- mixing c/c++ code with python
+	- a) extending cpython: fastest, but hard to implement. 🔥
 	- b) ctypes: signifiantly slower, but a lot easier to implement.
 
 <br><br>
@@ -39,7 +39,7 @@ links:
 
 <br><br>
 
-## 2) extending cpython (c extension modules)
+## 2) extending cpython (c extension modules) 🔥
 
 works by extending cpython with modules in which the gil is manually released. we can then call those modules in multithreaded python code.
 
