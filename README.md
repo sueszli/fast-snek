@@ -8,7 +8,7 @@ until then, we have to use workarounds.
 
 <br><br>
 
-## parallelism in python
+# parallelism in python
 
 _multiprocessing_
 
@@ -56,7 +56,7 @@ _mojo lang_
 
 <br><br>
 
-## references
+# references
 
 - https://realpython.com/python-parallel-processing/#make-python-threads-run-in-parallel
 - https://github.com/realpython/materials/tree/master/python-parallel-processing/
