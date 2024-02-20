@@ -12,7 +12,7 @@ until then, we have to use workarounds.
 
 # parallelism in python
 
-**_a) multiprocessing_**
+**_1) multiprocessing_**
 
 - https://docs.python.org/3/library/multiprocessing.html
 - https://docs.python.org/3/library/concurrent.futures.html (same, but more java-like)
@@ -30,7 +30,7 @@ until then, we have to use workarounds.
 
 <br>
 
-**_b) c extensions for multithreading_**
+**_2) c extension modules_**
 
 - https://docs.python.org/3/extending/extending.html
 
@@ -38,13 +38,34 @@ until then, we have to use workarounds.
 - the rust extension libraries are promising and used in some new popular projects [^rust1] [^rust2] but contains some unsafe code [^rustunsafe] that might be a security risk.
 - alternatively you can also use cython (not to be confused with cpython) to generate the c-code for the extension in python. cython is used in some popular projects like numpy and lxml. but the weird syntax makes it less versatile.
 
+- pros:
+     - bare metal level performance.
+- cons:
+     - requires very api-specific knowledge and a lot of boilerplate code.
+
 <br>
 
-**_c) mojo lang_**
+**_3) ctypes / foreign function interface (ffi)_**
 
+- https://docs.python.org/3/library/ctypes.html
+
+- calling a foreign function, not from python but from the underlying cpython interpreter.
+- doesn't require any wrapping in extension modules. you can use any binary (as a .so or .dll) as long as it has a c interface.
+- you don't need to manage the gil. it is automatically released when calling the foreign function [^release].
+
+- pros:
+     - bare metal level performance.
+     - works with any binary.
+     - easy to understand. doesn't require any api-specific knowledge.
+
+<br>
+
+**_4) super set languages_**
+
+- https://www.taichi-lang.org/
 - https://docs.modular.com/mojo/stdlib/python/python.html
 
-- superset language of python. still in its infancy, but it has a lot of potential.
+- the toolchain is always a lot more convenient than c/c++ but it is not necessarily the simpler approach as it is a new language to learn with its own quirks and limitations.
 
 <br><br>
 
@@ -62,3 +83,4 @@ until then, we have to use workarounds.
 [^rust1]: https://github.com/PyO3/pyo3/blob/main/guide/src/parallelism.md#parallelism
 [^rust2]: https://github.com/pola-rs/polars
 [^rustunsafe]: https://users.rust-lang.org/t/python-rust-interop/30243/12
+[^release]: https://docs.python.org/3/library/ctypes.html#:~:text=released%20before%20calling
