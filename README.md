@@ -50,12 +50,12 @@ until then, we have to use workarounds in python or superset programming languag
 
 - https://docs.python.org/3/library/ctypes.html
 
-- calling a foreign function in cpython doesn't require any wrapping in extension modules. you can use any binary (as a .so or .dll) as long as it has a c interface.
+- calling a foreign function in cpython.
 - you don't need to manage the gil. it is automatically released when calling the foreign function [^release].
 
 - pros:
      - bare metal level performance.
-     - works with any binary.
+     - works with any binary (as a .so or .dll) as long as it has a c interface.
      - easy to understand. doesn't require any api-specific knowledge.
      - more portable than c-extension modules. isn't specific to just the cpython implementation.
 - cons:
