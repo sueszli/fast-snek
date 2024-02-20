@@ -6,27 +6,31 @@ you currently can only achieve parallelism in python through multiprocessing, wh
 
 the community is actively working on this by either trying to introduce multiple sub-interpreters [^subint1] [^subint2] or making the GIL optional [^nogil1] [^nogil2] [^nogil3].
 
-until then, we either have to use superset programming languages [^superset1] [^superset2] or find workarounds in python.
+until then, we can:
 
-<br><br>
+- use superset programming languages [^superset1] [^superset2]
+- use different python implementations, like jit interpreters [^PyPy]
+- use the `multiprocessing` standard library
+- use c-python interop
 
 ## multiprocessing
 
 - https://docs.python.org/3/library/multiprocessing.html (same api as `threading`, so they're interchangable)
 - https://docs.python.org/3/library/concurrent.futures.html (same functionality but more java-like)
 
-- multiple system processes, each with their own seperate python interpreter, GIL and memory space.
+when using the `multiprocessing` library in python, we are calling multiple system processes that each come with their own seperate python interpreter, GIL and memeory space.
+
+this is very simple and straightforward, and the way the developers 
 
 - pros:
      - very simple.
-     - high cpu priority. the os always prioritizes processes over threads which can make a difference for specific types of parallelization.
-     - high memory isolation and safety.
+     - processes over thread:
+          - high cpu priority. the os always prioritizes processes over threads which can make a difference for specific types of parallelization.
+          - high memory isolation and safety.
 - cons:
-     - deserialization overhead: there is no shared memory, so data has to be serialized and deserialized for inter-process communication.
+     - serialization overhead: there is no shared memory, so data has to be serialized and deserialized for inter-process communication.
      - some objects are unserializeable: the `pickle` module is used to serialize objects. but some objects are not pickleable (i.e. lambdas, file handles, etc.).
      - creation overhead: slow creation, destruction and management, because we are context-switching to the os to manage system processes.
-
-<br><br>
 
 ## c from python: c extension modules
 
@@ -41,8 +45,6 @@ until then, we either have to use superset programming languages [^superset1] [^
 - cons:
      - very complex api. data isn't marshalled automatically.
      - not portable. we must link cpython during the build step to extend it. but fortunately there are nice build tools to simplify this [^setuptools].
-
-<br><br>
 
 ## c from python: ctypes (foreign function interface)
 
@@ -61,8 +63,6 @@ until then, we either have to use superset programming languages [^superset1] [^
 
 1. try to move as much of the computation as possible into the extension, to reduce python prep overhead, serialization costs, and function call overhead.
 2. if you’re dealing with large numbers of objects, reduce serialization overhead by having a custom extension type that can store the data with minimal conversions to/from Python, the way NumPy does with its array objects.
-
-<br><br>
 
 ## references
 
@@ -85,3 +85,4 @@ until then, we either have to use superset programming languages [^superset1] [^
 [^ctypebad]: https://stackoverflow.com/a/8069179/13045051
 [^nogolang]: https://stackoverflow.com/questions/70349271/ctypes-calling-go-dll-with-arguments-c-string
 [^setuptools]: https://setuptools.pypa.io/
+[^PyPy]: https://www.pypy.org/index.html
