@@ -39,7 +39,7 @@ links:
 
 <br><br>
 
-## 2) c extension modules
+## 2) extending cpython (c extension modules)
 
 works by extending cpython with modules in which the gil is manually released. we can then call those modules in multithreaded python code.
 
@@ -65,7 +65,7 @@ ctypes aren't meant to be used for high performance libraries that you use frequ
 
 - ✓ very simple: no knowledge of extension api necessary. gil is released automatically on each foreign function call [^release].
 - ✓ portable: also works with other python interpreters.
-- 𝙓 massive serialization overhead: automatic type conversions done by the ffi-library are very expensive [^ctypebad]. → this can be partially circumvented by passing pointers or using cffi [^edge].
+- 𝙓 massive serialization overhead: automatic type conversions done by the ffi-library are very expensive [^ctypebad]. → this can be partially circumvented by passing pointers or using cffi but it will still be significantly slower than extending cpython [^edge].
 
 links:
 
