@@ -53,7 +53,7 @@ alternatively you can also use cython (not to be confused with cpython) for code
 
 links:
 
-- https://docs.python.org/3/extending/extending.html
+- https://docs.python.org/3/extending/
 
 <br><br>
 
