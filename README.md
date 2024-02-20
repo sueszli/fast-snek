@@ -19,8 +19,8 @@ until then, we can use some workarounds:
 
 you have to be very intentional with the way you mix c and python:
 
-1. try to move as much of the computation as possible into the extension, to reduce overhead.
-2. if you’re dealing with large numbers of objects and shared memory, use c-extension modules with `mmap()` to reduce serialization overhead. otherwise call the foreign-function-interface with as little data as possible.
+1. try to move as much of the computation as possible into the extension.
+2. if you’re dealing with a lot of shared memory, use c-extension modules with `mmap()` to reduce serialization overhead. otherwise call the foreign-function-interface with as little data as possible.
 
 <br><br>
 
