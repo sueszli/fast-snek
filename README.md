@@ -33,9 +33,8 @@ until then, we have to use workarounds in python or superset programming languag
 **_2) c extension modules_**
 
 - https://docs.python.org/3/extending/extending.html
-- https://setuptools.pypa.io/ (recommended build tool)
 
-- extending cpython with modules in which the gil is manually released for a specific function call. we then call that extension them from python threads.
+- extending cpython with modules in which the gil is manually released. we can then call those modules in multithreaded python code.
 - the rust extension libraries are promising and used in some new popular projects [^rust1] [^rust2] but contain unsafe code [^rustunsafe] and are generally still too immature.
 - alternatively you can also use cython (not to be confused with cpython) for code generation. it's used by numpy and lxml but a lot more limiting than writing the extension modules by hand in c.
 
@@ -52,7 +51,7 @@ until then, we have to use workarounds in python or superset programming languag
 - https://docs.python.org/3/library/ctypes.html
 - https://cffi.readthedocs.io/en/stable/overview.html#main-mode-of-usage
 
-- accessing a shared library in c (or any other language providing a c interface [^nogolang]).
+- accessing a shared library in c (or any other language providing a c interface [^nogolang]). we can then call those libraries in multithreaded python code.
 
 - pros:
      - very performant.
