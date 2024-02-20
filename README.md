@@ -57,6 +57,8 @@ until then, we have to use workarounds.
      - bare metal level performance.
      - works with any binary.
      - easy to understand. doesn't require any api-specific knowledge.
+- cons:
+     - come with data serialization overhead (see above). automatic type conversions done by the ffi-library can be very costly. this can be circumvented by passing pointers but it is error-prone.
 
 <br>
 
