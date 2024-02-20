@@ -48,6 +48,9 @@ until then, we have to use workarounds.
 **_3) ctypes / foreign function interface (ffi)_**
 
 - https://docs.python.org/3/library/ctypes.html
+- https://cffi.readthedocs.io/en/latest/
+- https://www.swig.org/
+- https://pypi.org/project/pybind11/
 
 - calling a foreign function, not from python but from the underlying cpython interpreter.
 - doesn't require any wrapping in extension modules. you can use any binary (as a .so or .dll) as long as it has a c interface.
@@ -57,6 +60,7 @@ until then, we have to use workarounds.
      - bare metal level performance.
      - works with any binary.
      - easy to understand. doesn't require any api-specific knowledge.
+     - more portable than c-extension modules.
 - cons:
      - comes with data serialization overhead (see above). automatic type conversions done by the ffi-library can be very costly. this can be circumvented by passing pointers but it is error-prone.
 
