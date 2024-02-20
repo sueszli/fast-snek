@@ -34,7 +34,7 @@ _c extensions for multithreading_
 
 - https://docs.python.org/3/extending/extending.html
 
-- we can write extension modules to cpython where the GIL is released and call them from python's threads (which are also kernel-level [^thread]).
+- we can write extension modules to cpython where the GIL is released and call them from python's kernel-level [^thread] threads.
 - the rust implementation is promising and used in some new emerging projects [^rust1] [^rust2] but contains some unsafe code [^rustunsafe] that might be a security risk.
 
 <br><br>
