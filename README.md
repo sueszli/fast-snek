@@ -32,39 +32,32 @@ this is very simple and straightforward, and the intended way to write parallel 
 
 <br>
 
-## c from python: c extension modules
+## c extension modules
 
 - https://docs.python.org/3/extending/extending.html
 
-- extending cpython with modules in which the gil is manually released. we can then call those modules in multithreaded python code.
-- the rust extension libraries are promising and used in some new popular projects [^rust1] [^rust2] but contain unsafe code [^rustunsafe] and are generally still too immature.
-- alternatively you can also use cython (not to be confused with cpython) for code generation. it's heavily optimized and used by numpy and lxml but a lot more limiting than writing the extension modules by hand in c. 
+works by extending cpython with modules in which the gil is manually released. we can then call those modules in multithreaded python code.
 
-- pros:
-     - most performant. we are calling c functions inside the c interpreter. this way we can move compute into the extension.
-- cons:
-     - very complex api. data isn't marshalled automatically.
-     - not portable. we must link cpython during the build step to extend it. but fortunately there are nice build tools to simplify this [^setuptools].
+the rust extension libraries are promising and used in some new popular projects [^rust1] [^rust2] but contain unsafe code [^rustunsafe] and are generally still too immature.
+
+alternatively you can also use cython (not to be confused with cpython) for code generation. it's heavily optimized and used by `numpy` and `lxml` but a lot more complicated than writing the extension modules by hand in c. 
+
+- ✓ staying within c environment by calling c functions inside the cpython interpreter.
+- 𝙓 very complex api. data isn't marshalled automatically, gil isn't freed automatically.
+- 𝙓 not portable. constrained to c. we must link cpython during the build step to extend it. but fortunately there are nice build tools to simplify this [^setuptools].
 
 <br>
 
-## c from python: ctypes (foreign function interface)
+## ctypes (foreign function interface)
 
 - https://docs.python.org/3/library/ctypes.html
 - https://cffi.readthedocs.io/en/stable/overview.html#main-mode-of-usage
 
-- writing a shared library in c (or any other language providing a c interface [^nogolang]). we can then call those libraries in multithreaded python code.
+writing a shared library in c (or any other language providing a c interface [^nogolang]) and then calling it from multithreaded python code.
 
-- pros:
-     - very performant.
-     - very simple.
-     - gil is released automatically on each foreign function call [^release].
-- cons:
-     - deserialization overhead: we are effectively calling another process from python. automatic type conversions done by the ffi-library are very expensive [^ctypebad]. but fortunately this can be circumvented by passing pointers.
-     - call overhead.
-
-1. try to move as much of the computation as possible into the extension, to reduce python prep overhead, serialization costs, and function call overhead.
-2. if you’re dealing with large numbers of objects, reduce serialization overhead by having a custom extension type that can store the data with minimal conversions to/from Python, the way NumPy does with its array objects.
+- ✓ very simple. no knowledge of extension api necessary. gil is released automatically on each foreign function call [^release].
+- ✓ portable. also works with other python interpreters.
+- 𝙓 significantly higher python prep overhead, serialization costs and function call overhead. automatic type conversions done by the ffi-library are very expensive [^ctypebad]. → this can be partially circumvented by passing pointers.
 
 <br>
 
