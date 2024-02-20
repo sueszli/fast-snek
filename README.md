@@ -53,7 +53,7 @@ writing a shared library in c (or any other language providing a c interface [^n
 
 - ✓ very simple: no knowledge of extension api necessary. gil is released automatically on each foreign function call [^release].
 - ✓ portable: also works with other python interpreters.
-- 𝙓 significantly higher python prep overhead: serialization costs and function call overhead. automatic type conversions done by the ffi-library are very expensive [^ctypebad]. → this can be partially circumvented by passing pointers or using cffi [^edge].
+- 𝙓 significantly higher python prep overhead: same issues as with multiprocessing. automatic type conversions done by the ffi-library are very expensive [^ctypebad]. → this can be partially circumvented by passing pointers or using cffi [^edge].
 
 
 links:
