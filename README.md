@@ -62,7 +62,7 @@ until then, we have to use workarounds.
      - easy to understand. doesn't require any api-specific knowledge.
      - more portable than c-extension modules.
 - cons:
-     - comes with data serialization overhead (see above). automatic type conversions done by the ffi-library can be very costly. this can be circumvented by passing pointers but it is error-prone.
+     - comes with data serialization overhead (see above). automatic type conversions done by the ffi-library can be very costly (although this can be circumvented by passing pointers).
 
 <br>
 
