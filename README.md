@@ -36,15 +36,7 @@ _c extensions for multithreading_
 
 - we can write extension modules to cpython where the GIL is released and call them from python's kernel-level [^thread] threads.
 - the rust extension libraries are promising and used in some new popular projects [^rust1] [^rust2] but contains some unsafe code [^rustunsafe] that might be a security risk.
-
-<br><br>
-
-_cython_
-
-- https://cython.org/
-
-- c-extension code generator. used to be a superset language of python but is now a library.
-- trusted by numpy, lxml, etc.
+- alternatively you can also use the cython to generate c-code from python code and compile it to a shared library. this is a bit more high-level and safer than writing c-extensions manually. it's also used in some popular projects like numpy and lxml. but it doesn't scale well for large projects as it's not as versatile as c.
 
 <br><br>
 
