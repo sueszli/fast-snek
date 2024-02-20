@@ -56,6 +56,8 @@ links:
 
 writing a shared library in c (or any other language providing a c interface [^nogolang]) and then calling it from multithreaded python code.
 
+cffi, although not part of the standard library, is just as ergonomic and significantly faster [^edge].
+
 - ✓ very simple: no knowledge of extension api necessary. gil is released automatically on each foreign function call [^release].
 - ✓ portable: also works with other python interpreters.
 - 𝙓 significantly higher python prep overhead: serialization costs and function call overhead. automatic type conversions done by the ffi-library are very expensive [^ctypebad]. → this can be partially circumvented by passing pointers.
@@ -66,6 +68,8 @@ links:
 - https://cffi.readthedocs.io/en/stable/overview.html#main-mode-of-usage
 
 <br><br>
+
+so in conclusion, 
 
 ## references
 
@@ -89,3 +93,4 @@ links:
 [^nogolang]: https://stackoverflow.com/questions/70349271/ctypes-calling-go-dll-with-arguments-c-string
 [^setuptools]: https://setuptools.pypa.io/
 [^PyPy]: https://www.pypy.org/index.html
+[^edge]: https://github.com/mattip/c_from_python/blob/master/c_from_python.ipynb
