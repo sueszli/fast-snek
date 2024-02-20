@@ -28,16 +28,23 @@ _multiprocessing_
      - creation overhead: slow creation, destruction and management, because we are context-switching to the os to manage system processes.
      - not portable: processes are managed differently in each operating system.
 
-_extensions_
+_c extensions_
 
-- we can write extension modules where the GIL is released and call them from python.
+- we can write extension modules to cpython where the GIL is released and call them from python.
 
 - c/c++: https://docs.python.org/3/extending/extending.html
 - rust: https://github.com/PyO3/pyo3/blob/main/guide/src/parallelism.md#parallelism → relatively new but promising. used in the [polars](https://github.com/pola-rs/polars) project. but contains some [unsafe code](https://users.rust-lang.org/t/python-rust-interop/30243/12) that might be a security risk.
 
+_cython_
+
+- https://cython.org/
+
+- c-extension code generator. used to be a superset language of python but is now a library.
+- trusted by numpy, lxml, etc.
+
 _mojo lang_
 
-- new language that is designed to be a drop-in replacement for python. still in its infancy, but it has a lot of potential.
+- superset language of python. still in its infancy, but it has a lot of potential.
 
 - https://docs.modular.com/mojo/stdlib/python/python.html
 
