@@ -19,7 +19,7 @@ this is very simple, straightforward and the intended way to write parallel code
 - ✓ simple.
 - ✓ higher isolation, security, robustness.
 - 〜 context switching: actually doesn't matter, since the `threading` library threads are kernel-level as well.
-- 𝙓 resource overhead: memory allocation, creation and management.
+- 𝙓 resource overhead: memory allocation, creation and management. having a unique copy of the interpreter for each process is really wasteful.
 - 𝙓 serialization overhead: there is no shared memory, so data has to be serialized and deserialized for inter-process communication. also some objects are unserializeable: the `pickle` module is used to serialize objects. but some objects are not pickleable (i.e. lambdas, file handles, etc.).
 
 links:
@@ -70,7 +70,7 @@ to make our compute-bound python code faster, we can use:
 - superset programming languages [^superset1] [^superset2]
 	- still in their infancy.
 - different python implementations, like jit interpreters
-	- ~4x faster when single-threaded [^PyPy] but no parallelism.
+	- ~4x faster when single-threaded [^PyPy] but m
 - the `multiprocessing` standard library
 	- high call overhead, (de)serialization overhead, resource overhead
 - multithreaded c/c++ code 🔥
