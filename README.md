@@ -51,7 +51,7 @@ until then, we have to use workarounds in python or superset programming languag
 - https://docs.python.org/3/library/ctypes.html
 - https://cffi.readthedocs.io/en/stable/overview.html#main-mode-of-usage
 
-- accessing a shared library in c (or any other language providing a c interface [^nogolang]). we can then call those libraries in multithreaded python code.
+- writing a shared library in c (or any other language providing a c interface [^nogolang]). we can then call those libraries in multithreaded python code.
 
 - pros:
      - very performant.
