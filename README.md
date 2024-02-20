@@ -62,7 +62,7 @@ until then, we have to use workarounds.
      - easy to understand. doesn't require any api-specific knowledge.
      - more portable than c-extension modules.
 - cons:
-     - comes with data serialization overhead (see above). automatic type conversions done by the ffi-library can be very costly (although this can be circumvented by passing pointers).
+     - comes with data serialization overhead (see above). automatic type conversions done by the ffi-library are very expensive [^ctypebad]. this can be circumvented by passing pointers.
 
 <br>
 
@@ -90,3 +90,4 @@ until then, we have to use workarounds.
 [^rust2]: https://github.com/pola-rs/polars
 [^rustunsafe]: https://users.rust-lang.org/t/python-rust-interop/30243/12
 [^release]: https://docs.python.org/3/library/ctypes.html#:~:text=released%20before%20calling
+[^ctypebad]: https://stackoverflow.com/a/8069179/13045051
