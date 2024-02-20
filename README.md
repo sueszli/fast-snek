@@ -14,13 +14,9 @@ until then, we can use some workarounds:
 	- usually ~4x faster when single-threaded [^PyPy] but not parallel and very constrained.
 - the `multiprocessing` standard library
 	- high call overhead, (de)serialization overhead, resource overhead.
-- mixing c/c++ code with python
-	- fastest, but takes a lot of work to avoid (de)serialization overhead.
-
-you have to be very intentional with the way you mix c and python:
-
-1. try to move as much of the computation as possible into the extension.
-2. if you’re dealing with a lot of shared memory, use c-extension modules with `mmap()` to reduce serialization overhead. otherwise call the foreign-function-interface with as little data as possible.
+- mixing c/c++ code with python 🔥
+	- a) extending cpython: fastest, but hard to implement.
+	- b) ctypes: signifiantly slower, but a lot easier to implement.
 
 <br><br>
 
@@ -51,7 +47,7 @@ the rust extension libraries are promising and used in some new popular projects
 
 alternatively you can also use cython (not to be confused with cpython) for code generation. it's heavily optimized and used by `numpy` and `lxml` but a lot more complicated than writing the extension modules by hand in c. 
 
-- ✓ max performance: fastest possible interop because we're calling the external c functions from the cpython interpreter, written in c. we can easily share memory with `mmap()`.
+- ✓ max performance: fastest possible interop because we're calling the external c functions from the cpython interpreter, written in c. we can easily share large chunks of memory with `mmap()`.
 - 𝙓 very complex api: data isn't marshalled automatically, gil isn't freed automatically.
 - 𝙓 not portable: we must link cpython during the build step to extend it. → but fortunately there are nice build tools to simplify this [^setuptools].
 
@@ -65,9 +61,11 @@ links:
 
 writing a shared library in c (or any other language providing a c interface [^nogolang]) and then calling it from multithreaded python code.
 
+ctypes aren't meant to be used for high performance but backwards compatibility. you can still use them for that purpose and gain a significant amount of performance, but you move as much of the computation as possible into the c implementation and share as little data as possible.
+
 - ✓ very simple: no knowledge of extension api necessary. gil is released automatically on each foreign function call [^release].
 - ✓ portable: also works with other python interpreters.
-- 𝙓 massive serialization overhead: automatic type conversions done by the ffi-library are very expensive [^ctypebad]. → this can be partially circumvented by passing pointers or using cffi [^edge] but it still isn't ideal.
+- 𝙓 massive serialization overhead: automatic type conversions done by the ffi-library are very expensive [^ctypebad]. → this can be partially circumvented by passing pointers or using cffi [^edge].
 
 links:
 
