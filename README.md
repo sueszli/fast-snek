@@ -40,7 +40,7 @@ until then, we have to use workarounds in python or superset programming languag
 - alternatively you can also use cython (not to be confused with cpython) for code generation. it's used by numpy and lxml but a lot more limiting than writing the extension modules by hand in c.
 
 - pros:
-     - bare metal level performance.
+     - very performant.
 - cons:
      - requires very api-specific knowledge and a lot of boilerplate code.
      - not portable: the builds will be very system specific
@@ -53,7 +53,7 @@ until then, we have to use workarounds in python or superset programming languag
 - https://cffi.readthedocs.io/en/stable/overview.html#main-mode-of-usage
 
 - pros:
-     - bare metal level performance.
+     - very performant.
      - works with any binary (as a .so or .dll) as long as it has a c interface.
      - you don't need to manage the gil. it is automatically released when calling the foreign function [^release].
      - easy to understand. doesn't require any api-specific knowledge or boilerplate.
