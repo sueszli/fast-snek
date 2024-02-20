@@ -10,9 +10,7 @@ until then, we have to use workarounds in python or superset programming languag
 
 <br><br>
 
-# parallel programming in python
-
-**_1) multiprocessing_**
+## multiprocessing
 
 - https://docs.python.org/3/library/multiprocessing.html (same api as `threading`, so they're interchangable)
 - https://docs.python.org/3/library/concurrent.futures.html (same functionality but more java-like)
@@ -24,29 +22,29 @@ until then, we have to use workarounds in python or superset programming languag
      - high cpu priority. the os always prioritizes processes over threads which can make a difference for specific types of parallelization.
      - high memory isolation and safety.
 - cons:
-     - data serialization overhead: there is no shared memory, so data has to be serialized and deserialized for inter-process communication.
+     - deserialization overhead: there is no shared memory, so data has to be serialized and deserialized for inter-process communication.
      - some objects are unserializeable: the `pickle` module is used to serialize objects. but some objects are not pickleable (i.e. lambdas, file handles, etc.).
      - creation overhead: slow creation, destruction and management, because we are context-switching to the os to manage system processes.
 
-<br>
+<br><br>
 
-**_2) c extension modules_**
+## c from python: c extension modules
 
 - https://docs.python.org/3/extending/extending.html
 
 - extending cpython with modules in which the gil is manually released. we can then call those modules in multithreaded python code.
 - the rust extension libraries are promising and used in some new popular projects [^rust1] [^rust2] but contain unsafe code [^rustunsafe] and are generally still too immature.
-- alternatively you can also use cython (not to be confused with cpython) for code generation. it's used by numpy and lxml but a lot more limiting than writing the extension modules by hand in c.
+- alternatively you can also use cython (not to be confused with cpython) for code generation. it's heavily optimized and used by numpy and lxml but a lot more limiting than writing the extension modules by hand in c. 
 
 - pros:
-     - most performant. we are calling c functions inside the c interpreter.
+     - most performant. we are calling c functions inside the c interpreter. this way we can move compute into the extension.
 - cons:
      - very complex api. data isn't marshalled automatically.
      - not portable. we must link cpython during the build step to extend it. but fortunately there are nice build tools to simplify this [^setuptools].
 
-<br>
+<br><br>
 
-**_3) ctypes / foreign function interface (ffi)_**
+## c from python: ctypes (foreign function interface)
 
 - https://docs.python.org/3/library/ctypes.html
 - https://cffi.readthedocs.io/en/stable/overview.html#main-mode-of-usage
@@ -58,15 +56,20 @@ until then, we have to use workarounds in python or superset programming languag
      - very simple.
      - gil is released automatically on each foreign function call [^release].
 - cons:
-     - data serialization overhead: we are effectively calling another process from python. automatic type conversions done by the ffi-library are very expensive [^ctypebad]. but fortunately this can be circumvented by passing pointers.
+     - deserialization overhead: we are effectively calling another process from python. automatic type conversions done by the ffi-library are very expensive [^ctypebad]. but fortunately this can be circumvented by passing pointers.
+     - call overhead.
+
+1. try to move as much of the computation as possible into the extension, to reduce python prep overhead, serialization costs, and function call overhead.
+2. if you’re dealing with large numbers of objects, reduce serialization overhead by having a custom extension type that can store the data with minimal conversions to/from Python, the way NumPy does with its array objects.
 
 <br><br>
 
-# references
+## references
 
 - https://realpython.com/python-parallel-processing/#make-python-threads-run-in-parallel
 - https://github.com/realpython/materials/tree/master/python-parallel-processing/
 - https://github.com/mattip/c_from_python/blob/master/c_from_python.ipynb
+- https://pythonspeed.com/articles/python-extension-performance/
 
 [^subint1]: https://peps.python.org/pep-0554/
 [^subint2]: https://peps.python.org/pep-0683/
