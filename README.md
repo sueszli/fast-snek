@@ -6,7 +6,21 @@ you currently can only achieve parallelism in python through multiprocessing, wh
 
 the community is actively working on this by either trying to introduce multiple sub-interpreters [^subint1] [^subint2] or making the GIL optional [^nogil1] [^nogil2] [^nogil3].
 
-until then, we can use some of the workarounds introduced below.
+until then, we can use some workarounds:
+
+- superset programming languages [^superset1] [^superset2]
+	- still in their infancy.
+- different python implementations, like jit interpreters
+	- ~4x faster when single-threaded [^PyPy] but not parallel and constrained to specific python versions and library calls.
+- the `multiprocessing` standard library ⭐️
+	- high call overhead, (de)serialization overhead, resource overhead.
+- mixing c/c++ code with python ⭐️
+	- fastest, but needs some extra work to avoid the (de)serialization overhead.
+
+you have to be very intentional with the way you mix c and python:
+
+1. try to move as much of the computation as possible into the extension, to reduce overhead.
+2. if you’re dealing with large numbers of objects and shared memory, use c-extension modules with `mmap()` to reduce serialization overhead. otherwise call the foreign-function-interface with as little data as possible.
 
 <br><br>
 
@@ -60,26 +74,6 @@ links:
 
 - https://docs.python.org/3/library/ctypes.html
 - https://cffi.readthedocs.io/en/stable/overview.html#main-mode-of-usage
-
-<br><br>
-
-## conclusion
-
-to make our compute-bound python code faster, we can use:
-
-- superset programming languages [^superset1] [^superset2]
-	- still in their infancy.
-- different python implementations, like jit interpreters
-	- ~4x faster when single-threaded [^PyPy] but not parallel and constrained to specific python versions and library calls
-- the `multiprocessing` standard library
-	- high call overhead, (de)serialization overhead, resource overhead
-- multithreaded c/c++ code 🔥
-
-mixing c with python is fastest, but comes with its own caveats:
-
-1. Try to move as much of the computation as possible into the extension, to reduce Python prep overhead, serialization costs, and function call overhead.
-If you’re dealing with large numbers of objects, reduce serialization overhead by having a custom extension type that can store the data with minimal conversions to/from Python, the way NumPy does with its array objects.
-
 
 <br><br>
 
