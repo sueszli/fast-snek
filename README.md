@@ -6,12 +6,7 @@ you currently can only achieve parallelism in python through multiprocessing, wh
 
 the community is actively working on this by either trying to introduce multiple sub-interpreters [^subint1] [^subint2] or making the GIL optional [^nogil1] [^nogil2] [^nogil3].
 
-until then, we can:
-
-- use superset programming languages [^superset1] [^superset2]
-- use different python implementations, like jit interpreters [^PyPy]
-- use the `multiprocessing` standard library
-- use c-python interop
+until then, we can use some of the workarounds introduced below.
 
 <br><br>
 
@@ -69,7 +64,22 @@ links:
 
 <br><br>
 
-so in conclusion, 
+## conclusion
+
+to make our compute-bound python code faster, we can use:
+
+- superset programming languages [^superset1] [^superset2] → still in their infancy. introduce an entirely different language.
+- different python implementations, like jit interpreters [^PyPy] → can make single threaded code 4x faster without any intervention. but constrained to specific python versions and limit interop.
+- the `multiprocessing` standard library → high call overhead, (de)serialization overhead, resource overhead
+- multithreaded c/c++ code 🔥
+
+mixing c with python is fastest, but comes with its own caveats:
+
+1. Try to move as much of the computation as possible into the extension, to reduce Python prep overhead, serialization costs, and function call overhead.
+If you’re dealing with large numbers of objects, reduce serialization overhead by having a custom extension type that can store the data with minimal conversions to/from Python, the way NumPy does with its array objects.
+
+
+<br><br>
 
 ## references
 
