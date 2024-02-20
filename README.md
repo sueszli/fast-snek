@@ -45,7 +45,7 @@ works by extending cpython with modules in which the gil is manually released. w
 
 the rust extension libraries are promising and used in some new popular projects [^rust1] [^rust2] but contain unsafe code [^rustunsafe] and are generally still too immature.
 
-alternatively you can also use cython (not to be confused with cpython) for code generation. it's heavily optimized and used by `numpy` and `lxml` but a lot more complicated than writing the extension modules by hand in c. 
+alternatively you can also use cython (not to be confused with cpython) for code generation. it's heavily optimized and used by `numpy` and `lxml`.
 
 - ✓ max performance: fastest possible interop because we're calling the external c functions from the cpython interpreter, written in c. we can easily share large chunks of memory with `mmap()`.
 - 𝙓 very complex api: data isn't marshalled automatically, gil isn't freed automatically.
