@@ -35,14 +35,15 @@ until then, we have to use workarounds in python or superset programming languag
 - https://docs.python.org/3/extending/extending.html
 - https://setuptools.pypa.io/ (recommended build tool)
 
-- we write extension modules to cpython where the gil is released. we then call that extension them from python threads.
+- extending cpython with modules in which the gil is manually released for a specific function call. we then call that extension them from python threads.
 - the rust extension libraries are promising and used in some new popular projects [^rust1] [^rust2] but contain unsafe code [^rustunsafe] and are generally still too immature.
 - alternatively you can also use cython (not to be confused with cpython) for code generation. it's used by numpy and lxml but a lot more limiting than writing the extension modules by hand in c.
 
 - pros:
      - very performant.
 - cons:
-     - requires very api-specific knowledge and a lot of boilerplate code.
+     - very complex.
+     - not portable. we must link cpython during the build step to extend it. but fortunately there are nice build tools for this [^setuptools].
 
 <br>
 
@@ -81,3 +82,4 @@ until then, we have to use workarounds in python or superset programming languag
 [^release]: https://docs.python.org/3/library/ctypes.html#:~:text=released%20before%20calling
 [^ctypebad]: https://stackoverflow.com/a/8069179/13045051
 [^nogolang]: https://stackoverflow.com/questions/70349271/ctypes-calling-go-dll-with-arguments-c-string
+[^setuptools]: https://setuptools.pypa.io/
