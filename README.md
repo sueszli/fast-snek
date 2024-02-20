@@ -42,6 +42,7 @@ until then, we have to use workarounds in python or superset programming languag
      - bare metal level performance.
 - cons:
      - requires very api-specific knowledge and a lot of boilerplate code.
+     - not portable: you have to link the python source code to build your project.
 
 <br>
 
