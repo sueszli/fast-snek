@@ -50,13 +50,11 @@ until then, we have to use workarounds in python or superset programming languag
 
 - https://docs.python.org/3/library/ctypes.html
 
-- calling a foreign function in cpython.
-- you don't need to manage the gil. it is automatically released when calling the foreign function [^release].
-
 - pros:
      - bare metal level performance.
      - works with any binary (as a .so or .dll) as long as it has a c interface.
-     - easy to understand. doesn't require any api-specific knowledge.
+     - you don't need to manage the gil. it is automatically released when calling the foreign function [^release].
+     - easy to understand. doesn't require any api-specific knowledge or boilerplate.
      - more portable than c-extension modules. isn't specific to just the cpython implementation.
 - cons:
      - data serialization overhead: automatic type conversions done by the ffi-library are very expensive [^ctypebad] → but fortunately this can be circumvented by passing pointers.
