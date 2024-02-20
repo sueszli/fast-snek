@@ -49,9 +49,6 @@ until then, we have to use workarounds in python or superset programming languag
 **_3) ctypes / foreign function interface (ffi)_**
 
 - https://docs.python.org/3/library/ctypes.html
-- https://cffi.readthedocs.io/en/latest/
-- https://www.swig.org/
-- https://pypi.org/project/pybind11/
 
 - calling a foreign function, not from python but from the underlying cpython interpreter.
 - doesn't require any wrapping in extension modules. you can use any binary (as a .so or .dll) as long as it has a c interface.
