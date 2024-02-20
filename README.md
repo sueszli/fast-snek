@@ -17,13 +17,13 @@ until then, we can:
 
 ## multiprocessing
 
-when using the `multiprocessing` library in python, we are calling multiple system processes that each come with their own seperate python interpreter, GIL and memeory space.
+when using the `multiprocessing` library in python, we can call multiple system processes that each come with their own seperate python interpreter, GIL and memeory space.
 
 this is very simple and straightforward, and the intended way to write parallel code in the latest python version. but it comes with all the pros and cons of using a processes for parallel programming:
 
 - ✓ simple.
 - ✓ higher isolation, security, robustness.
-- 〜 context switching: actually doesn't matter, since the `threading` library uses kernel-level threads.
+- 〜 context switching: actually doesn't matter, since the `threading` library uses kernel-level threads as well.
 - 𝙓 resource overhead: memory allocation, creation and management.
 - 𝙓 serialization overhead: there is no shared memory, so data has to be serialized and deserialized for inter-process communication. also some objects are unserializeable: the `pickle` module is used to serialize objects. but some objects are not pickleable (i.e. lambdas, file handles, etc.).
 
