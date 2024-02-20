@@ -6,7 +6,7 @@ you currently can only achieve parallelism in python through multiprocessing, wh
 
 the community is actively working on this by either trying to introduce multiple sub-interpreters [^subint1] [^subint2] or making the GIL optional [^nogil1] [^nogil2] [^nogil3].
 
-until then, we have to use workarounds.
+until then, we have to use workarounds or superset programming languages [^superset1] [^superset2] with their own quirks and limitations.
 
 <br><br>
 
@@ -64,15 +64,6 @@ until then, we have to use workarounds.
 - cons:
      - data serialization overhead: automatic type conversions done by the ffi-library are very expensive [^ctypebad] (this can be circumvented by passing pointers).
 
-<br>
-
-**_4) super set languages_**
-
-- https://www.taichi-lang.org/
-- https://docs.modular.com/mojo/stdlib/python/python.html
-
-- the toolchain is always a lot more convenient than c/c++ but it is not necessarily the simpler approach as it is a new language to learn with its own quirks and limitations.
-
 <br><br>
 
 # references
@@ -85,6 +76,8 @@ until then, we have to use workarounds.
 [^nogil1]: https://peps.python.org/pep-0703/
 [^nogil2]: https://discuss.python.org/t/a-steering-council-notice-about-pep-703-making-the-global-interpreter-lock-optional-in-cpython/30474
 [^nogil3]: https://engineering.fb.com/2023/10/05/developer-tools/python-312-meta-new-features/
+[^superset1]: https://www.taichi-lang.org/
+[^superset2]: https://docs.modular.com/mojo/stdlib/python/python.html
 [^thread]: https://stackoverflow.com/questions/46212711/python-threading-module-creates-user-space-threads-or-kernel-spece-threads
 [^rust1]: https://github.com/PyO3/pyo3/blob/main/guide/src/parallelism.md#parallelism
 [^rust2]: https://github.com/pola-rs/polars
