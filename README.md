@@ -8,9 +8,7 @@ the community is actively working on this by either trying to introduce multiple
 
 until then, we have to use workarounds in python or superset programming languages [^superset1] [^superset2].
 
-<br><br>
-
-# parallelism in python
+<br>
 
 **_1) multiprocessing_**
 
