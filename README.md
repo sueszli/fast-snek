@@ -1,6 +1,8 @@
 the cpython interpreter is already pretty good at io-bound tasks through async/await.
 
-but the GIL (global interpreter lock) hinders parallelism for cpu-bound tasks.
+but the GIL (global interpreter lock) hinders thread-parallelism in cpu-bound tasks.
+
+you currently can only achieve parallelism in python through multiprocessing, which is not ideal for many use-cases.
 
 the community is actively working on this by either trying to introduce multiple sub-interpreters [^subint1] [^subint2] or making the GIL optional [^nogil1] [^nogil2] [^nogil3].
 
@@ -12,27 +14,25 @@ until then, we have to use workarounds.
 
 _multiprocessing_
 
-- this is the intended way: by running multiple system processes, each with its python interpreter that has its own GIL and memory space.
+- multiple system processes, each with their own seperate python interpreter, GIL and memory space.
 
 - https://docs.python.org/3/library/multiprocessing.html
 - https://docs.python.org/3/library/concurrent.futures.html (same functionality but inspired by java)
 
 - pros:
-     - simple to implement and understand, drop-in replacement for threading.
+     - simple to implement and understand, drop-in replacement for threading. (threads are not parallel in python).
      - high cpu priority (the os usually prioritizes processes over threads).
      - high memory isolation and safety.
 - cons:
-
      - data serialization overhead: there is no shared memory, so data has to be serialized and deserialized for inter-process communication.
      - some objects are unserializeable: the `pickle` module is used to serialize objects, and some objects are not pickleable (i.e. lambdas, file handles, etc.).
      - creation overhead: slow creation, destruction and management, because we are context-switching to the os to manage system processes.
-     - not portable: processes are managed differently in each operating system.
 
 <br><br>
 
-_c extensions for (parallel) multithreading_
+_c extensions for multithreading_
 
-- we can write extension modules to cpython where the GIL is released and call them from python.
+- we can write extension modules to cpython where the GIL is released and call them from python's threads (which are also kernel-level [^thread]).
 
 - c/c++: https://docs.python.org/3/extending/extending.html
 - rust: https://github.com/PyO3/pyo3/blob/main/guide/src/parallelism.md#parallelism → relatively new but promising. used in the [polars](https://github.com/pola-rs/polars) project. but contains some [unsafe code](https://users.rust-lang.org/t/python-rust-interop/30243/12) that might be a security risk.
@@ -66,3 +66,4 @@ _mojo lang_
 [^nogil1]: https://peps.python.org/pep-0703/
 [^nogil2]: https://discuss.python.org/t/a-steering-council-notice-about-pep-703-making-the-global-interpreter-lock-optional-in-cpython/30474
 [^nogil3]: https://engineering.fb.com/2023/10/05/developer-tools/python-312-meta-new-features/
+[^thread]: https://stackoverflow.com/questions/46212711/python-threading-module-creates-user-space-threads-or-kernel-spece-threads
