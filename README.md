@@ -60,7 +60,7 @@ until then, we have to use workarounds in python or superset programming languag
      - easy to understand. doesn't require any api-specific knowledge.
      - more portable than c-extension modules. isn't specific to just the cpython implementation.
 - cons:
-     - data serialization overhead: automatic type conversions done by the ffi-library are very expensive [^ctypebad] (this can be circumvented by passing pointers).
+     - data serialization overhead: automatic type conversions done by the ffi-library are very expensive [^ctypebad] → but fortunately this can be circumvented by passing pointers.
 
 <br><br>
 
