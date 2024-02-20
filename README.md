@@ -35,7 +35,7 @@ until then, we have to use workarounds in python or superset programming languag
 - https://docs.python.org/3/extending/extending.html
 
 - we can write extension modules to cpython where the GIL is released and call them from python's kernel-level [^thread] threads.
-- the rust extension libraries are promising and used in some new popular projects [^rust1] [^rust2] but contain unsafe code [^rustunsafe] that might be a security risk.
+- the rust extension libraries are promising and used in some new popular projects [^rust1] [^rust2] but contain unsafe code [^rustunsafe] and are generally still immature.
 - alternatively you can also use cython (not to be confused with cpython) to generate the c-code for the extension in python. cython is used in some popular projects like numpy and lxml. but the weird syntax makes it less versatile.
 
 - pros:
