@@ -42,7 +42,7 @@ the rust extension libraries are promising and used in some new popular projects
 
 alternatively you can also use cython (not to be confused with cpython) for code generation. it's heavily optimized and used by `numpy` and `lxml` but a lot more complicated than writing the extension modules by hand in c. 
 
-- ✓ staying within c environment by calling c functions inside the cpython interpreter.
+- ✓ max performance: fastest possible interop because we're calling the external c functions from the cpython interpreter, written in c.
 - 𝙓 very complex api. data isn't marshalled automatically, gil isn't freed automatically.
 - 𝙓 not portable. constrained to c. we must link cpython during the build step to extend it. but fortunately there are nice build tools to simplify this [^setuptools].
 
