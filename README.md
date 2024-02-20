@@ -14,10 +14,10 @@ until then, we have to use workarounds.
 
 _multiprocessing_
 
-- multiple system processes, each with their own seperate python interpreter, GIL and memory space.
-
 - https://docs.python.org/3/library/multiprocessing.html
-- https://docs.python.org/3/library/concurrent.futures.html (same functionality but inspired by java)
+- https://docs.python.org/3/library/concurrent.futures.html (same, but more java-like)
+
+- multiple system processes, each with their own seperate python interpreter, GIL and memory space.
 
 - pros:
      - simple to implement and understand, drop-in replacement for threading. (threads are not parallel in python).
@@ -32,10 +32,9 @@ _multiprocessing_
 
 _c extensions for multithreading_
 
+- https://docs.python.org/3/extending/extending.html
+
 - we can write extension modules to cpython where the GIL is released and call them from python's threads (which are also kernel-level [^thread]).
-
-- c/c++: https://docs.python.org/3/extending/extending.html
-
 - the rust implementation is promising and used in some new emerging projects [^rust1] [^rust2] but contains some unsafe code [^rustunsafe] that might be a security risk.
 
 <br><br>
@@ -51,9 +50,9 @@ _cython_
 
 _mojo lang_
 
-- superset language of python. still in its infancy, but it has a lot of potential.
-
 - https://docs.modular.com/mojo/stdlib/python/python.html
+
+- superset language of python. still in its infancy, but it has a lot of potential.
 
 <br><br>
 
