@@ -41,8 +41,8 @@ until then, we have to use workarounds in python or superset programming languag
 - pros:
      - very performant.
 - cons:
-     - very complex.
-     - not portable. we must link cpython during the build step to extend it. but fortunately there are nice build tools for this [^setuptools].
+     - very complex api. data isn't marshalled automatically.
+     - not portable. we must link cpython during the build step to extend it. but fortunately there are nice build tools to simplify this [^setuptools].
 
 <br>
 
