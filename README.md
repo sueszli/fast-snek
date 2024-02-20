@@ -6,7 +6,7 @@ you currently can only achieve parallelism in python through multiprocessing, wh
 
 the community is actively working on this by either trying to introduce multiple sub-interpreters [^subint1] [^subint2] or making the GIL optional [^nogil1] [^nogil2] [^nogil3].
 
-until then, we have to use workarounds in python or superset programming languages [^superset1] [^superset2].
+until then, we either have to use superset programming languages [^superset1] [^superset2] or find workarounds in python.
 
 <br><br>
 
