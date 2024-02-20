@@ -14,18 +14,18 @@ until then, we have to use workarounds.
 
 **_1) multiprocessing_**
 
-- https://docs.python.org/3/library/multiprocessing.html
+- https://docs.python.org/3/library/multiprocessing.html (same api as `threading`)
 - https://docs.python.org/3/library/concurrent.futures.html (same, but more java-like)
 
 - multiple system processes, each with their own seperate python interpreter, GIL and memory space.
 
 - pros:
-     - simple to implement and understand, drop-in replacement for threading. (threads are not parallel in python).
-     - high cpu priority (the os usually prioritizes processes over threads).
+     - very simple.
+     - high cpu priority. the os usually prioritizes processes over threads. for some calculations processes are faster than threads.
      - high memory isolation and safety.
 - cons:
      - data serialization overhead: there is no shared memory, so data has to be serialized and deserialized for inter-process communication.
-     - some objects are unserializeable: the `pickle` module is used to serialize objects, and some objects are not pickleable (i.e. lambdas, file handles, etc.).
+     - some objects are unserializeable: the `pickle` module is used to serialize objects. but some objects are not pickleable (i.e. lambdas, file handles, etc.).
      - creation overhead: slow creation, destruction and management, because we are context-switching to the os to manage system processes.
 
 <br>
