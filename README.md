@@ -49,7 +49,7 @@ alternatively you can also use cython (not to be confused with cpython) for code
 
 - ✓ max performance: fastest possible interop because we're calling the external c functions from the cpython interpreter, written in c. we can easily share large chunks of memory with `mmap()`.
 - 𝙓 very complex api: data isn't marshalled automatically, gil isn't freed automatically.
-- 𝙓 not portable: we must link cpython during the build step to extend it. → but fortunately there are nice build tools to simplify this [^setuptools].
+- 𝙓 not portable: the build step is very difficult but fortunately there are nice build tools to simplify this [^setuptools].
 
 links:
 
