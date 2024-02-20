@@ -33,6 +33,7 @@ until then, we have to use workarounds in python or superset programming languag
 **_2) c extension modules_**
 
 - https://docs.python.org/3/extending/extending.html
+- https://setuptools.pypa.io/ (recommended build tool to extend cpython)
 
 - we can write extension modules to cpython where the GIL is released and call them from python's kernel-level [^thread] threads.
 - the rust extension libraries are promising and used in some new popular projects [^rust1] [^rust2] but contain unsafe code [^rustunsafe] and are generally still immature.
@@ -42,7 +43,7 @@ until then, we have to use workarounds in python or superset programming languag
      - bare metal level performance.
 - cons:
      - requires very api-specific knowledge and a lot of boilerplate code.
-     - not portable: you have to link the python source code to build your project.
+     - not portable: the builds will be very system specific
 
 <br>
 
