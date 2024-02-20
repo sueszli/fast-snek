@@ -14,14 +14,14 @@ until then, we have to use workarounds.
 
 **_1) multiprocessing_**
 
-- https://docs.python.org/3/library/multiprocessing.html (same api as `threading`)
-- https://docs.python.org/3/library/concurrent.futures.html (same, but more java-like)
+- https://docs.python.org/3/library/multiprocessing.html (same api as `threading`, so they're interchangable)
+- https://docs.python.org/3/library/concurrent.futures.html (same functionality but more java-like)
 
 - multiple system processes, each with their own seperate python interpreter, GIL and memory space.
 
 - pros:
      - very simple.
-     - high cpu priority. the os usually prioritizes processes over threads which can make a difference for specific types of parallelization.
+     - high cpu priority. the os always prioritizes processes over threads which can make a difference for specific types of parallelization.
      - high memory isolation and safety.
 - cons:
      - data serialization overhead: there is no shared memory, so data has to be serialized and deserialized for inter-process communication.
@@ -35,7 +35,7 @@ until then, we have to use workarounds.
 - https://docs.python.org/3/extending/extending.html
 
 - we can write extension modules to cpython where the GIL is released and call them from python's kernel-level [^thread] threads.
-- the rust extension libraries are promising and used in some new popular projects [^rust1] [^rust2] but contains some unsafe code [^rustunsafe] that might be a security risk.
+- the rust extension libraries are promising and used in some new popular projects [^rust1] [^rust2] but contain unsafe code [^rustunsafe] that might be a security risk.
 - alternatively you can also use cython (not to be confused with cpython) to generate the c-code for the extension in python. cython is used in some popular projects like numpy and lxml. but the weird syntax makes it less versatile.
 
 - pros:
