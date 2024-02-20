@@ -28,7 +28,7 @@ _multiprocessing_
      - creation overhead: slow creation, destruction and management, because we are context-switching to the os to manage system processes.
      - not portable: processes are managed differently in each operating system.
 
-_c extensions_
+_c extensions for (parallel) multithreading_
 
 - we can write extension modules to cpython where the GIL is released and call them from python.
 
