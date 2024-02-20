@@ -61,7 +61,7 @@ links:
 
 writing a shared library in c (or any other language providing a c interface [^nogolang]) and then calling it from multithreaded python code.
 
-ctypes aren't meant to be used for high performance libraries that you use frequently but codebase-glue. you can still use them for that purpose and gain a significant amount of performance, but you move as much of the computation as possible into the c implementation, share as little data, pass as little data, call the foreign function as little as possible.
+ctypes aren't meant to be used for high performance libraries that you use frequently but codebase-glue. you can still use them for that purpose and gain a significant amount of performance, but you have to move as much of the computation as possible into the c implementation. additionally you should: share as little data, pass as little data and call the foreign function as little as possible.
 
 - ✓ very simple: no knowledge of extension api necessary. gil is released automatically on each foreign function call [^release].
 - ✓ portable: also works with other python interpreters.
