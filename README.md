@@ -11,7 +11,7 @@ until then, we can use some workarounds:
 - superset programming languages [^superset1] [^superset2]
 	- still in their infancy.
 - different python implementations, like jit interpreters
-	- ~4x faster when single-threaded [^PyPy] but not parallel and constrained to specific python versions and library calls.
+	- usually ~4x faster when single-threaded [^PyPy] but not parallel and very constrained.
 - the `multiprocessing` standard library
 	- high call overhead, (de)serialization overhead, resource overhead.
 - mixing c/c++ code with python
