@@ -35,7 +35,7 @@ until then, we have to use workarounds in python or superset programming languag
 - https://docs.python.org/3/extending/extending.html
 - https://setuptools.pypa.io/ (recommended build tool)
 
-- we can write extension modules to cpython where the GIL is released and call them from python's kernel-level [^thread] threads.
+- we write extension modules to cpython where the gil is released. we then call that extension them from python threads.
 - the rust extension libraries are promising and used in some new popular projects [^rust1] [^rust2] but contain unsafe code [^rustunsafe] and are generally still too immature.
 - alternatively you can also use cython (not to be confused with cpython) for code generation. it's used by numpy and lxml but a lot more limiting than writing the extension modules by hand in c.
 
@@ -43,7 +43,6 @@ until then, we have to use workarounds in python or superset programming languag
      - very performant.
 - cons:
      - requires very api-specific knowledge and a lot of boilerplate code.
-     - not portable: the builds will be very system specific
 
 <br>
 
@@ -52,14 +51,14 @@ until then, we have to use workarounds in python or superset programming languag
 - https://docs.python.org/3/library/ctypes.html
 - https://cffi.readthedocs.io/en/stable/overview.html#main-mode-of-usage
 
+- accessing a shared library in c (or any other language providing a c interface [^nogolang]).
+
 - pros:
      - very performant.
-     - works with any binary (as a .so or .dll) as long as it has a c interface.
-     - you don't need to manage the gil. it is automatically released when calling the foreign function [^release].
-     - easy to understand. doesn't require any api-specific knowledge or boilerplate.
-     - more portable than c-extension modules. isn't specific to just the cpython implementation.
+     - very simple.
+     - gil is released automatically on each foreign function call [^release].
 - cons:
-     - data serialization overhead: automatic type conversions done by the ffi-library are very expensive [^ctypebad] → but fortunately this can be circumvented by passing pointers.
+     - data serialization overhead: automatic type conversions done by the ffi-library are very expensive [^ctypebad]. but fortunately this can be circumvented by passing pointers.
 
 <br><br>
 
@@ -76,9 +75,9 @@ until then, we have to use workarounds in python or superset programming languag
 [^nogil3]: https://engineering.fb.com/2023/10/05/developer-tools/python-312-meta-new-features/
 [^superset1]: https://www.taichi-lang.org/
 [^superset2]: https://docs.modular.com/mojo/stdlib/python/python.html
-[^thread]: https://stackoverflow.com/questions/46212711/python-threading-module-creates-user-space-threads-or-kernel-spece-threads
 [^rust1]: https://github.com/PyO3/pyo3/blob/main/guide/src/parallelism.md#parallelism
 [^rust2]: https://github.com/pola-rs/polars
 [^rustunsafe]: https://users.rust-lang.org/t/python-rust-interop/30243/12
 [^release]: https://docs.python.org/3/library/ctypes.html#:~:text=released%20before%20calling
 [^ctypebad]: https://stackoverflow.com/a/8069179/13045051
+[^nogolang]: https://stackoverflow.com/questions/70349271/ctypes-calling-go-dll-with-arguments-c-string
