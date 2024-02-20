@@ -21,7 +21,7 @@ until then, we have to use workarounds.
 
 - pros:
      - very simple.
-     - high cpu priority. the os usually prioritizes processes over threads. for some calculations processes are faster than threads.
+     - high cpu priority. the os usually prioritizes processes over threads which can make a difference for specific types of parallelization.
      - high memory isolation and safety.
 - cons:
      - data serialization overhead: there is no shared memory, so data has to be serialized and deserialized for inter-process communication.
