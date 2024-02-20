@@ -28,12 +28,16 @@ _multiprocessing_
      - creation overhead: slow creation, destruction and management, because we are context-switching to the os to manage system processes.
      - not portable: processes are managed differently in each operating system.
 
+<br>
+
 _c extensions for (parallel) multithreading_
 
 - we can write extension modules to cpython where the GIL is released and call them from python.
 
 - c/c++: https://docs.python.org/3/extending/extending.html
 - rust: https://github.com/PyO3/pyo3/blob/main/guide/src/parallelism.md#parallelism → relatively new but promising. used in the [polars](https://github.com/pola-rs/polars) project. but contains some [unsafe code](https://users.rust-lang.org/t/python-rust-interop/30243/12) that might be a security risk.
+
+<br>
 
 _cython_
 
