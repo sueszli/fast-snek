@@ -10,7 +10,7 @@ until then, we can use some of the workarounds introduced below.
 
 <br><br>
 
-## multiprocessing
+## 1) multiprocessing
 
 when using the `multiprocessing` library in python, we can call multiple system processes that each come with their own seperate python interpreter, GIL and memory space.
 
@@ -29,7 +29,7 @@ links:
 
 <br><br>
 
-## c extension modules
+## 2) c extension modules
 
 works by extending cpython with modules in which the gil is manually released. we can then call those modules in multithreaded python code.
 
@@ -47,7 +47,7 @@ links:
 
 <br><br>
 
-## ctypes (foreign function interface)
+## 3) ctypes (foreign function interface)
 
 writing a shared library in c (or any other language providing a c interface [^nogolang]) and then calling it from multithreaded python code.
 
