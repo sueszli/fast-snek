@@ -51,7 +51,7 @@ the rust extension libraries are promising and used in some new popular projects
 
 alternatively you can also use cython (not to be confused with cpython) for code generation. it's heavily optimized and used by `numpy` and `lxml` but a lot more complicated than writing the extension modules by hand in c. 
 
-- ✓ max performance: fastest possible interop because we're calling the external c functions from the cpython interpreter, written in c.
+- ✓ max performance: fastest possible interop because we're calling the external c functions from the cpython interpreter, written in c. we can easily share memory with `mmap()`.
 - 𝙓 very complex api: data isn't marshalled automatically, gil isn't freed automatically.
 - 𝙓 not portable: we must link cpython during the build step to extend it. → but fortunately there are nice build tools to simplify this [^setuptools].
 
@@ -67,7 +67,7 @@ writing a shared library in c (or any other language providing a c interface [^n
 
 - ✓ very simple: no knowledge of extension api necessary. gil is released automatically on each foreign function call [^release].
 - ✓ portable: also works with other python interpreters.
-- 𝙓 significantly higher python prep overhead: same issues as with multiprocessing. automatic type conversions done by the ffi-library are very expensive [^ctypebad]. → this can be partially circumvented by passing pointers or using cffi [^edge].
+- 𝙓 massive serialization overhead: automatic type conversions done by the ffi-library are very expensive [^ctypebad]. → this can be partially circumvented by passing pointers or using cffi [^edge] but it still isn't ideal.
 
 links:
 
