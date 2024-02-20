@@ -15,7 +15,7 @@ until then, we can use some workarounds:
 - the `multiprocessing` standard library
 	- high call overhead, (de)serialization overhead, resource overhead.
 - mixing c/c++ code with python
-	- fastest, but takes a lot of work to avoid (de)serialization overhead
+	- fastest, but takes a lot of work to avoid (de)serialization overhead.
 
 you have to be very intentional with the way you mix c and python:
 
