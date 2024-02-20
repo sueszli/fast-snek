@@ -65,6 +65,7 @@ until then, we have to use workarounds in python or superset programming languag
 
 - https://realpython.com/python-parallel-processing/#make-python-threads-run-in-parallel
 - https://github.com/realpython/materials/tree/master/python-parallel-processing/
+- https://github.com/mattip/c_from_python/blob/master/c_from_python.ipynb
 
 [^subint1]: https://peps.python.org/pep-0554/
 [^subint2]: https://peps.python.org/pep-0683/
