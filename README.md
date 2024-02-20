@@ -69,7 +69,6 @@ writing a shared library in c (or any other language providing a c interface [^n
 - ✓ portable: also works with other python interpreters.
 - 𝙓 significantly higher python prep overhead: same issues as with multiprocessing. automatic type conversions done by the ffi-library are very expensive [^ctypebad]. → this can be partially circumvented by passing pointers or using cffi [^edge].
 
-
 links:
 
 - https://docs.python.org/3/library/ctypes.html
