@@ -12,7 +12,7 @@ until then, we have to use workarounds.
 
 # parallelism in python
 
-_multiprocessing_
+**_multiprocessing_**
 
 - https://docs.python.org/3/library/multiprocessing.html
 - https://docs.python.org/3/library/concurrent.futures.html (same, but more java-like)
@@ -36,7 +36,7 @@ _c extensions for multithreading_
 
 - we can write extension modules to cpython where the GIL is released and call them from python's kernel-level [^thread] threads.
 - the rust extension libraries are promising and used in some new popular projects [^rust1] [^rust2] but contains some unsafe code [^rustunsafe] that might be a security risk.
-- alternatively you can also use the cython to generate c-code from python code and compile it to a shared library. this is a bit more high-level and safer than writing c-extensions manually. it's also used in some popular projects like numpy and lxml. but it doesn't scale well for large projects as it's not as versatile as c.
+- alternatively you can also use cython (not to be confused with cpython) to generate the c-code for the extension in python. cython is used in some popular projects like numpy and lxml. but the weird syntax makes it less versatile.
 
 <br><br>
 
