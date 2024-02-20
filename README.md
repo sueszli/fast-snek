@@ -28,9 +28,7 @@ until then, we have to use workarounds.
      - some objects are unserializeable: the `pickle` module is used to serialize objects, and some objects are not pickleable (i.e. lambdas, file handles, etc.).
      - creation overhead: slow creation, destruction and management, because we are context-switching to the os to manage system processes.
 
-<br><br>
-
-_c extensions for multithreading_
+**_c extensions for multithreading_**
 
 - https://docs.python.org/3/extending/extending.html
 
@@ -38,9 +36,7 @@ _c extensions for multithreading_
 - the rust extension libraries are promising and used in some new popular projects [^rust1] [^rust2] but contains some unsafe code [^rustunsafe] that might be a security risk.
 - alternatively you can also use cython (not to be confused with cpython) to generate the c-code for the extension in python. cython is used in some popular projects like numpy and lxml. but the weird syntax makes it less versatile.
 
-<br><br>
-
-_mojo lang_
+**_mojo lang_**
 
 - https://docs.modular.com/mojo/stdlib/python/python.html
 
