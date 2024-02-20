@@ -27,8 +27,8 @@ this is very simple and straightforward, and the intended way to write parallel 
 - ✓ simple.
 - ✓ higher isolation, security, robustness.
 - ✓ context switching: actually doesn't matter, since the `threading` library uses kernel-level threads.
-- 𝙭 resource overhead: memory allocation, creation and management.
-- 𝙭 serialization overhead: there is no shared memory, so data has to be serialized and deserialized for inter-process communication. also some objects are unserializeable: the `pickle` module is used to serialize objects. but some objects are not pickleable (i.e. lambdas, file handles, etc.).
+- 𝙓 resource overhead: memory allocation, creation and management.
+- 𝙓 serialization overhead: there is no shared memory, so data has to be serialized and deserialized for inter-process communication. also some objects are unserializeable: the `pickle` module is used to serialize objects. but some objects are not pickleable (i.e. lambdas, file handles, etc.).
 
 <br>
 
