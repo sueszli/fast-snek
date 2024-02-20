@@ -39,7 +39,7 @@ until then, we have to use workarounds in python or superset programming languag
 - alternatively you can also use cython (not to be confused with cpython) for code generation. it's used by numpy and lxml but a lot more limiting than writing the extension modules by hand in c.
 
 - pros:
-     - most performant. we are calling c directly from the interpreter that is also written in c.
+     - most performant. we are calling c functions inside the c interpreter.
 - cons:
      - very complex api. data isn't marshalled automatically.
      - not portable. we must link cpython during the build step to extend it. but fortunately there are nice build tools to simplify this [^setuptools].
@@ -58,7 +58,7 @@ until then, we have to use workarounds in python or superset programming languag
      - very simple.
      - gil is released automatically on each foreign function call [^release].
 - cons:
-     - data serialization overhead: automatic type conversions done by the ffi-library are very expensive [^ctypebad]. but fortunately this can be circumvented by passing pointers.
+     - data serialization overhead: we are effectively calling another process from python. automatic type conversions done by the ffi-library are very expensive [^ctypebad]. but fortunately this can be circumvented by passing pointers.
 
 <br><br>
 
