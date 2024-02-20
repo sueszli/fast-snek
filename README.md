@@ -39,7 +39,7 @@ until then, we have to use workarounds in python or superset programming languag
 - alternatively you can also use cython (not to be confused with cpython) for code generation. it's used by numpy and lxml but a lot more limiting than writing the extension modules by hand in c.
 
 - pros:
-     - very performant.
+     - most performant. we are calling c directly from the interpreter that is also written in c.
 - cons:
      - very complex api. data isn't marshalled automatically.
      - not portable. we must link cpython during the build step to extend it. but fortunately there are nice build tools to simplify this [^setuptools].
