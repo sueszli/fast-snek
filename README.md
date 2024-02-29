@@ -76,6 +76,8 @@ links:
 
 ## references
 
+- inspiration: https://snarky.ca/programming-language-selection-is-a-form-of-premature-optimization/
+
 - https://docs.python.org/3/contents.html
 
 - https://realpython.com/python-parallel-processing/#make-python-threads-run-in-parallel
