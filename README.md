@@ -95,7 +95,7 @@ links:
 
 <br><br>
 
-## references
+## reference
 
 - inspiration: https://snarky.ca/programming-language-selection-is-a-form-of-premature-optimization/
 
