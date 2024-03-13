@@ -1,3 +1,22 @@
+```
+    Y
+  .-^-.
+ /     \      .- ~ ~ -.    pssssss...
+()     ()    /   _ _   `.                     _ _ _
+ \_   _/    /  /     \   \                . ~  _ _  ~ .
+   | |     /  /       \   \             .' .~       ~-. `.
+   | |    /  /         )   )           /  /             `.`.
+   \ \_ _/  /         /   /           /  /                `'
+    \_ _ _.'         /   /           (  (
+                    /   /             \  \
+                   /   /               \  \    psssss.....
+                  /   /                 )  )
+                 (   (                 /  /
+                  `.  `.             .'  /
+                    `.   ~ - - - - ~   .'
+                       ~ . _ _ _ _ . ~
+```
+
 the cpython interpreter is already pretty good at io-bound tasks through async/await.
 
 but the GIL (global interpreter lock) hinders thread-parallelism in cpu-bound tasks.
